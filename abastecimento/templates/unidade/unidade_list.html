@@ -1,0 +1,88 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+<div class="align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <div class="lh-1">
+        <h1 class="h6 mb-0 text-white lh-1">Unidades Orçamentárias</h1>
+        <small>Since 2011</small>
+    </div>
+</div>
+
+<div class="p-3 my-2 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Dicas</h6>
+    <div class="d-flex text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Ei, @{{ user.username }}</strong>
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            Cadastre as Unidades Orçamentárias conforme o orçamento do Município
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            Verifique com a contabilidade antes de cadastrar
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            A unidade orçamentária é utilizada tanto pelo veículo como pelo contrato
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm">
+            Se não estiver a conseguir realizar um abasteciemnto verifique a unidade orçamentária do veículo
+        </p>
+    </div>
+</div>
+
+<div class="p-3 my-3 mb-5 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Registros</h6>
+
+    <div class="text-body-secondary pt-3">
+        <a href="{% url 'unidade_createPage' %}" class="btn btn-dark btn-sm float-end mb-2">Adicionar</a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Código</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Operações</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for unidade in unidades_page.object_list %}
+            <tr>
+                <th scope="row">{{ unidade.id }}</th>
+                <td>{{ unidade.codigo }}</td>
+                <td>{{ unidade.descricao }}</td>
+                <td><a href="{% url 'unidade_delete' unidade.id %}">Excluir</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <small class="d-block text-end mt-1">
+            <nav aria-label="Page navigation example" class="pt-4 pb-5 mb-2">
+                <ul class="pagination float-end">
+                    {% if unidades_page.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ unidades_page.previous_page_number }}">Anterior</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item"><a class="page-link" href="#">{{ unidades_page.number }} de {{ unidades_page.paginator.num_pages }}</a></li>
+
+                    {% if unidades_page.has_next %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?page={{ unidades_page.next_page_number }}">Próxima</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <em>Paginação com tamanho 5, se deseja mudar o tamanho altere a variável 'paginator'</em>
+        </small>
+    </div>
+</div>
+{% endblock %}

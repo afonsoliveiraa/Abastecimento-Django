@@ -1,0 +1,88 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+<div class="align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <div class="lh-1">
+        <h1 class="h6 mb-0 text-white lh-1">Veículos</h1>
+        <small>Since 2011</small>
+    </div>
+</div>
+
+<div class="p-3 my-2 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Dicas</h6>
+    <div class="d-flex text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">Ei, @{{ user.username }}</strong>
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            Antes de cadastrar um novo veículo verifique se já não existe o veículo cadastrado
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            Veículos não são apenas carros, podem ser máquinas pesadas, equipamentos ...
+        </p>
+    </div>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm">
+            A unidade orçamentária do veículo define quais contratos podem ser utilizados no momento de realizar um abastecimento
+        </p>
+    </div>
+</div>
+
+
+<div class="p-3 my-3 mb-5 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Registros</h6>
+
+    <div class="text-body-secondary pt-3">
+        <a href="{% url 'veiculo_createPage' %}" class="btn btn-dark btn-sm float-end mb-2">Adicionar</a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Placa</th>
+                <th scope="col">Unidade</th>
+                <th scope="col">Linha</th>
+                <th scope="col">Kilometragem</th>
+                <th scope="col">Operações</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for veiculo in veiculos_page.object_list %}
+            <tr>
+                <th scope="row">{{ veiculo.id }}</th>
+                <td>{{ veiculo.placa }}</td>
+                <td>{{ veiculo.unidade }}</td>
+                <td>{{ veiculo.linha }}</td>
+                <td>{{ veiculo.km }}</td>
+                <td><a href="{% url 'veiculo_delete' veiculo.id %}">Excluir</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <small class="d-block text-end mt-1">
+            <nav aria-label="Page navigation example" class="pt-4 pb-5 mb-2">
+                <ul class="pagination float-end">
+                    {% if veiculos_page.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ veiculos_page.previous_page_number }}">Anterior</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item"><a class="page-link" href="#">{{ veiculos_page.number }} de {{ veiculos_page.paginator.num_pages }}</a></li>
+
+                    {% if veiculos_page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ veiculos_page.next_page_number }}">Próxima</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <em>Paginação com tamanho 5, se deseja mudar o tamanho altere a variável 'paginator'</em>
+        </small>
+    </div>
+
+</div>
+{% endblock %}

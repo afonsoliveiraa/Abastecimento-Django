@@ -1,0 +1,105 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+<div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <div class="lh-1">
+        <h1 class="h6 mb-0 text-white lh-1">Abastecimentos</h1>
+        <small>Since 2011</small>
+    </div>
+</div>
+
+<div class="p-3 my-4 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Criar</h6>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">@{{ user.username }}</strong>
+            Some representative placeholder content, with some information about this user. Imagine this
+            being some
+            sort of status update, perhaps?
+        </p>
+    </div>
+    <div class="d-flex text-body-secondary pt-3">
+        <form action="{% url 'abastecimento_update' abastecimento.id %}" method="post" class="small">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-dark btn-sm">Salvar</button>
+        </form>
+    </div>
+
+    <small class="d-block text-end mt-3">
+        <a href="{% url 'abastecimento_list' %}">Voltar</a>
+    </small>
+</div>
+
+<div class="p-3 my-4 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Itens Abastecimento</h6>
+    <div class="text-body-secondary pt-3">
+        <p class="pb-3 mb-0 small lh-sm border-bottom">
+            <strong class="d-block text-gray-dark">@{{ user.username }}</strong>
+            Some representative placeholder content, with some information about this user. Imagine this
+            being some
+            sort of status update, perhaps?
+        </p>
+    </div>
+    <div class="d-flex text-body-secondary pt-3">
+        <form action="{% url 'item_create' abastecimento.id %}" method="post" class="small">
+            {% csrf_token %}
+            {{ item_form }}
+            <button type="submit" class="btn btn-dark btn-sm mt-3">Salvar</button>
+        </form>
+    </div>
+
+</div>
+
+<div class="p-3 my-3 mb-5 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Registros</h6>
+
+    <div class="text-body-secondary pt-3">
+        <p class="float-end">Total: R$ {{ y }}</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Veículo</th>
+                <th scope="col">Combustivel</th>
+                <th scope="col">Quantidade</th>
+                <th scope="col">Valor Unitário</th>
+                <th scope="col">Operações</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in itens_page.object_list %}
+            <tr>
+                <th scope="row">{{ item.id }}</th>
+                <th>{{ item.veiculo }}</th>
+                <td>{{ item.combustivel }}</td>
+                <td>{{ item.quantidade_combustivel }}</td>
+                <td>{{ item.valor_unitario }}</td>
+                <td><a href="{% url 'item_delete' item.id %}">Excluir</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <small class="d-block text-end mt-1">
+            <nav aria-label="Page navigation example" class="pt-4 pb-5 mb-2">
+                <ul class="pagination float-end">
+                    {% if itens_page.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ itens_page.previous_page_number }}">Anterior</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item"><a class="page-link" href="#">{{ itens_page.number }} de {{ itens_page.paginator.num_pages }}</a></li>
+
+                    {% if itens_page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ itens_page.next_page_number }}">Próxima</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <em>Paginação com tamanho 5, se deseja mudar o tamanho altere a variável 'paginator'</em>
+        </small>
+    </div>
+
+</div>
+{% endblock %}

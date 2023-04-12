@@ -1,0 +1,27 @@
+html,
+body {
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+body {
+  font-size: 12px;
+  padding-top: 51px;
+}
+
+.container {
+  max-width: 960px;
+}
+
+.nav-scroller .nav-link {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  color: black;
+}
+
+.nav-scroller .nav-link:hover {
+  color: red;
+}
+
+.bg-purple {
+    background: linear-gradient(90deg, rgba(253,29,29,1) 25%, rgba(252,176,69,1) 100%);
+}

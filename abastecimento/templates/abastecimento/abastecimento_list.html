@@ -1,0 +1,107 @@
+{% extends 'home/base.html' %}
+
+{% block main %}
+
+
+<div class="align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
+    <div class="lh-1">
+        <h1 class="h6 mb-0 text-white lh-1">Abastecimentos</h1>
+        <small>Since 2011</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4 text-center">
+        <div class="col-12 p-3 bg-body rounded shadow-sm">
+            <h1 class="card-title pricing-card-title border-bottom pb-2">R$ {{ total_dia }}<small
+                    class="text-body-secondary fw-light">/dia</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Valor total dos abastecimentos realizados <br> no dia {{ dia }}</li>
+                <li>Valores em reais</li>
+                <br>
+                <br>
+            </ul>
+        </div>
+    </div>
+    <div class="col-4 text-center">
+        <div class="col-12 p-3 bg-body rounded shadow-sm">
+            <h1 class="card-title pricing-card-title border-bottom pb-2">R$ {{ total_mes }}<small
+                    class="text-body-secondary fw-light">/mês</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Valor total dos abastecimentos realizados <br> no mês {{ mes }}</li>
+                <li>Valores em reais</li>
+                <br>
+                <br>
+            </ul>
+        </div>
+    </div>
+    <div class="col-4 text-center">
+        <div class="col-12 p-3 bg-body rounded shadow-sm">
+            <h1 class="card-title pricing-card-title border-bottom pb-2">R$ {{ total_ano }}<small
+                    class="text-body-secondary fw-light">/ano</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>Valor total dos abastecimentos realizados <br> no ano {{ ano }}</li>
+                <li>Valores em reais</li>
+                <br>
+                <br>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="p-3 my-3 mb-5 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mb-0">Registros</h6>
+
+    <div class="text-body-secondary pt-3">
+        <a href="{% url 'abastecimento_createPage' %}" class="btn btn-dark btn-sm float-end mb-2">Adicionar</a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Data</th>
+                <th scope="col">Valor Total</th>
+                <th scope="col">Contrato</th>
+                <th scope="col">Operações</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for abastecimento in abastecimentos_page.object_list %}
+            <tr>
+                <th scope="row">{{ abastecimento.id }}</th>
+                <th scope="row">{{ abastecimento.data|date:"d, M Y" }}</th>
+                <td>R$ {{ abastecimento.valor }}</td>
+                <td>{{ abastecimento.contrato }}</td>
+                <td><a href="{% url 'abastecimento_edit' abastecimento.id %}">Editar</a> / <a
+                        href="{% url 'abastecimento_delete' abastecimento.id %}">Excluir</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <small class="d-block text-end mt-1">
+            <nav aria-label="Page navigation example" class="pt-4 pb-5 mb-2">
+                <ul class="pagination float-end">
+                    {% if abastecimentos_page.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ abastecimentos_page.previous_page_number }}">Anterior</a>
+                    </li>
+                    {% endif %}
+
+                    <li class="page-item"><a class="page-link" href="#">{{ abastecimentos_page.number }} de {{ abastecimentos_page.paginator.num_pages }}</a></li>
+
+                    {% if abastecimentos_page.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ abastecimentos_page.next_page_number }}">Próxima</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <em>Paginação com tamanho 5, se deseja mudar o tamanho altere a variável 'paginator'</em>
+        </small>
+    </div>
+</div>
+
+
+{% endblock %}

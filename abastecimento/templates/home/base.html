@@ -140,7 +140,7 @@
 
 <header>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
-        <div class="container">
+        <div class="container-fluid">
             <a class="navbar-brand" href="{% url 'index' %}">Sistema para Frota</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -169,13 +169,13 @@
     </nav>
 
     <div class="nav-scroller bg-body shadow-sm mx-auto">
-        <nav class="nav justify-content-center" aria-label="Secondary navigation">
-            <a class="nav-link me-3 py-3" href="{% url 'index' %}"> Home</a>
-            <a class="nav-link me-3 py-3" href="{% url 'usuario_list' %}">Usuários</a>
-            <a class="nav-link me-3 py-3" href="{% url 'unidade_list' %}">Unidades Orçamentárias</a>
-            <a class="nav-link me-3 py-3" href="{% url 'veiculo_list' %}">Veículos</a>
-            <a class="nav-link me-3 py-3" href="{% url 'contrato_list' %}">Contratos</a>
-            <a class="nav-link me-3 py-3" href="{% url 'abastecimento_list' %}">Abastecimentos</a>
+        <nav class="nav" aria-label="Secondary navigation">
+            <a class="nav-link me-2 py-3" href="{% url 'index' %}"> Home</a>
+            <a class="nav-link me-2 py-3" href="{% url 'usuario_list' %}">Usuários</a>
+            <a class="nav-link me-2 py-3" href="{% url 'unidade_list' %}">Unidades Orçamentárias</a>
+            <a class="nav-link me-2 py-3" href="{% url 'veiculo_list' %}">Veículos</a>
+            <a class="nav-link me-2 py-3" href="{% url 'contrato_list' %}">Contratos</a>
+            <a class="nav-link me-2 py-3" href="{% url 'abastecimento_list' %}">Abastecimentos</a>
             {% load permission_tags %}
             {% if user|can:'updates' %}
             <a class="nav-link py-3" href="{% url 'update_createPage' %}">Updates</a>

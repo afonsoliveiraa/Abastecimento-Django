@@ -8,10 +8,9 @@ https://abastecimento-django-production.up.railway.app/accounts/login/
 
 # Sobre o projeto
 
-Abastecimento-Django é uma aplicação full stack web desensolvida para auxiliar empresas no controle dos abastecimentos
+Abastecimento-Django é uma aplicação full stack web desensolvida para auxiliar os municípios no controle dos abastecimentos
 
-A aplicação consiste no cadastro de unidades orçamentárias, veículos e contratos, bases necessárias para a realização dos abastecimentos e de seus itens. Como o sistema foi projetado
-para o setor público o cadastro de novos usuários não é feito de fora da aplicação. Portanto o primeiro login é feito com o usuário admin, senha: admin.
+A aplicação consiste no cadastro de unidades orçamentárias, veículos e contratos, bases necessárias para a realização dos abastecimentos e de seus itens além dos dashboards de abastecimentos. Como o sistema foi projetado para o setor público o cadastro de novos usuários não é feito de fora da aplicação. Portanto o primeiro login é feito com o usuário admin, senha: admin.Outro diferencia do 'Abasteciemnto-Django' são os 'Recent Updates' atualização postadas apenas pelo usuário admin para os demais usuários, ou seja, nesse usuário em específico existe a tela 'Updates' que permite a publicação dessas atualizações.
 
 ## Layout web
 ![Web 1](https://github.com/afonsoliveiraa/Abastecimento-Django/blob/main/static/assets/telas.jpg) 
@@ -27,7 +26,7 @@ para o setor público o cadastro de novos usuários não é feito de fora da apl
 
 ```bash
 # clonar repositório
-git clone https://github.com/afonsoliveiraa/Almoxarifado-Django
+git clone https://github.com/afonsoliveiraa/Abasteciemento-Django
 
 # Criar máquina virtual
 
